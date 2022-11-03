@@ -1,4 +1,6 @@
 set encoding=UTF-8
+set autoread
+au CursorHold * checktime
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -12,6 +14,7 @@ Plugin 'ryanoasis/vim-devicons'                           " pretty icons everywh
 Plugin 'luochen1990/rainbow'                              " rainbow parenthesis
 Plugin 'hzchirs/vim-material'                             " material color themes
 Plugin 'gregsexton/MatchTag'                              " highlight matching html tags
+Plugin 'djoshea/vim-autoread'
 "Plugin 'Jorengarenar/vim-MvVis'                           " move visual selection
 " Use release branch (recommend)
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -33,6 +36,8 @@ Plugin 'junegunn/fzf.vim'                                 " fuzzy search integra
 Plugin 'mhinz/vim-startify'                               " cool start up screen
 Plugin 'tpope/vim-fugitive'                               " git support
 Plugin 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
 
 
 " Dart
@@ -124,7 +129,7 @@ set ignorecase smartcase    " make searches case-insensitive, unless they
 
 " --- keys ---
 set backspace=indent,eol,start  " allow backspacing over everything.
-set esckeys                     " Allow cursor keys in insert mode.
+" set esckeys                     " Allow cursor keys in insert mode.
 set nostartofline               " Make j/k respect the columns
 set timeoutlen=500              " how long it wait for mapped commands
 set ttimeoutlen=100             " faster timeout for escape key and others
@@ -460,7 +465,7 @@ map <leader>( vi(xi  P
 
 function RunProgram()
     if &ft=='cpp'
-        :!clear && g++ -g % -o output && ./output
+        :!clear && g++ -g % -o output && time ./output output < input.txt  > output.txt
     elseif &ft=='c'
         :!clear && gcc -g % -o output && ./output
     elseif &ft=='html'
@@ -474,7 +479,17 @@ function RunProgram()
     endif
 endfunction
 
+function RunCPP()
+    let l:currentWindow=winnr()
+    execute "normal! :vsplit input.txt\<cr>"
+    execute ":30winc <"
+    execute "normal! :split output.txt\<cr>"
+    execute "normal! :wincmd p \<cr>"
+endfunction
+
+
 map <F2> :call RunProgram()<CR>
+map <F3> :call  RunCPP()<CR>
 map <F4> :set paste<CR>
 map <F5> :set nopaste<CR>
 map <F1> :FlutterRun <CR>
@@ -506,3 +521,5 @@ nnoremap <leader>fr :FlutterHotReload<cr>
 nnoremap <leader>fR :FlutterHotRestart<cr>
 nnoremap <leader>fD :FlutterVisualDebug<cr>
 let g:dart_format_on_save = 1
+let g:coc_disable_startup_warning = 1
+noremap <silent> <C-S-Left> :vertical resize -20<CR>
