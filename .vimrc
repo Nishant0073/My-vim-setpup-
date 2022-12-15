@@ -15,6 +15,8 @@ Plugin 'luochen1990/rainbow'                              " rainbow parenthesis
 Plugin 'hzchirs/vim-material'                             " material color themes
 Plugin 'gregsexton/MatchTag'                              " highlight matching html tags
 Plugin 'djoshea/vim-autoread'
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plugin 'Jorengarenar/vim-MvVis'                           " move visual selection
 " Use release branch (recommend)
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -31,18 +33,18 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mattn/emmet-vim'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
-Plugin 'junegunn/fzf.vim'                                 " fuzzy search integration
 Plugin 'mhinz/vim-startify'                               " cool start up screen
 Plugin 'tpope/vim-fugitive'                               " git support
 Plugin 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-
+Plugin 'https://github.com/907th/vim-auto-save.git'
 
 " Dart
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'thosakwe/vim-flutter'
+Plugin 'nvim-lua/plenary.nvim'
+" Plugin 'akinsho/flutter-tools.nvim'
 
 " css
 Plugin 'ap/vim-css-color'
@@ -145,14 +147,15 @@ set t_Co=256                " 256 colors terminal
 
 let g:molokai_original=0
 colorscheme molokai
-hi Pmenu guibg='#00010a' guifg=white                    " popup menu colors
 hi Comment gui=italic cterm=italic                      " italic comments
-hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
+highlight Pmenu ctermbg=gray guibg=gray
 hi NonText guifg=bg                                     " mask ~ on empty lines
 hi clear CursorLineNr                                   " use the theme color for relative number
 hi CursorLineNr gui=bold                                " make relative number bold
 hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
 let g:material_terminal_italics = 1
+"remove background
+hi Normal guibg=NONE ctermbg=NONE
 
 " colors for git (especially the gutter)
 hi DiffAdd  guibg=#0f111a guifg=#43a047
@@ -332,6 +335,7 @@ let g:rainbow_active = 1
 
 
 "" FZF
+
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
@@ -342,6 +346,9 @@ let g:fzf_tags_command = 'ctags -R'
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+nnoremap <silent> <Leader>s :Rg<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+
 
 
 
@@ -507,19 +514,35 @@ hi clear LineNr
 highlight clear SignColumn
 
 "FLUTTER
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a viw <Plug>(coc-codeaction-selected)
+nmap <leader>a  viw <Plug>(coc-codeaction-selected)
+
+xmap <leader>d  call CocActionAsync('showSignatureHelp') 
+nmap <leader>d  call CocActionAsync('showSignatureHelp') 
 
 " Enable Flutter menu
 " call FlutterMenu()
 
-" Some of these key choices were arbitrary;
-" it's just an example.
-nnoremap <leader>fa :FlutterRun<cr>
-nnoremap <leader>fq :FlutterQuit<cr>
-nnoremap <leader>fr :FlutterHotReload<cr>
-nnoremap <leader>fR :FlutterHotRestart<cr>
-nnoremap <leader>fD :FlutterVisualDebug<cr>
 let g:dart_format_on_save = 1
 let g:coc_disable_startup_warning = 1
 noremap <silent> <C-S-Left> :vertical resize -20<CR>
+let g:netrw_browsex_viewer="brave-browser"
+
+
+
+" let g:auto_save = 1  " enable AutoSave on Vim startup
+" .vimrc
+" let g:auto_save_silent = 1  " do not display the auto-save notification
+
+
+
+	if has('nvim-0.4.0') || has('patch-8.2.0750')
+	  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+	  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+	  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	endif
+
+"SHA256:UwDEJy1Mbaka9FNDLlHQA54zjoPrX7apfIRDUZhPNjA wowdeveloperfrontend1@gmail.com
