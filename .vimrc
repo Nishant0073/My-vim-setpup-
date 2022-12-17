@@ -545,4 +545,3 @@ let g:netrw_browsex_viewer="brave-browser"
 	  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 	endif
 
-"SHA256:UwDEJy1Mbaka9FNDLlHQA54zjoPrX7apfIRDUZhPNjA wowdeveloperfrontend1@gmail.com
