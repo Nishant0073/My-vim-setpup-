@@ -42,9 +42,7 @@ Plugin 'https://github.com/907th/vim-auto-save.git'
 
 " Dart
 Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'thosakwe/vim-flutter'
 Plugin 'nvim-lua/plenary.nvim'
-" Plugin 'akinsho/flutter-tools.nvim'
 
 " css
 Plugin 'ap/vim-css-color'
@@ -66,7 +64,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'preservim/nerdtree'
 " Plugin 'bling/vim-airline'
 
-let g:airline_theme='transparent'
+" let g:airline_theme='transparent'
 " colorschemes
 Plugin 'tomasr/molokai'
 Plugin 'rakr/vim-one'
@@ -316,7 +314,6 @@ let g:coc_global_extensions = [
             \'coc-clangd',
             \'coc-java',
             \ 'coc-snippets',
-            \ 'coc-flutter',
             \]
 
 
@@ -499,13 +496,7 @@ map <F2> :call RunProgram()<CR>
 map <F3> :call  RunCPP()<CR>
 map <F4> :set paste<CR>
 map <F5> :set nopaste<CR>
-map <F1> :FlutterRun <CR>
 
-"Flutter 
-noremap <leader>ff :CocList --input=flutter commands <CR>
-nnoremap <leader>fd :CocList flutter.gotoSuper<CR>
-noremap <leader>r :CocList flutter.dev.hotReload<CR>
-noremap <leader>rn :CocList flutter.dev.hotRestart<CR>
 
 set clipboard=unnamedplus
 "transperent background
@@ -513,26 +504,20 @@ set clipboard=unnamedplus
 hi clear LineNr
 highlight clear SignColumn
 
-"FLUTTER
 xmap <leader>a viw <Plug>(coc-codeaction-selected)
 nmap <leader>a  viw <Plug>(coc-codeaction-selected)
 
 xmap <leader>d  call CocActionAsync('showSignatureHelp') 
 nmap <leader>d  call CocActionAsync('showSignatureHelp') 
-
-" Enable Flutter menu
-" call FlutterMenu()
-
-let g:dart_format_on_save = 1
-let g:coc_disable_startup_warning = 1
 noremap <silent> <C-S-Left> :vertical resize -20<CR>
 let g:netrw_browsex_viewer="brave-browser"
 
 
 
-" let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save = 1  " enable AutoSave on Vim startup
 " .vimrc
-" let g:auto_save_silent = 1  " do not display the auto-save notification
+let g:auto_save_silent = 1  " do not display the auto-save notification
+let g:auto_save_write_all_buffers = 1
 
 
 
@@ -544,4 +529,4 @@ let g:netrw_browsex_viewer="brave-browser"
 	  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 	  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 	endif
-
+ 
