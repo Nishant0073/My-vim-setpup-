@@ -18,9 +18,7 @@ Plugin 'djoshea/vim-autoread'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plugin 'Jorengarenar/vim-MvVis'                           " move visual selection
-" Use release branch (recommend)
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'natebosch/dartlang-snippets'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'https://github.com/tpope/vim-commentary'
@@ -71,33 +69,26 @@ Plugin 'rakr/vim-one'
 Plugin 'vim-scripts/summerfruit256.vim'
 Plugin 'yuttie/comfortable-motion.vim'
 
-
 " required for vundle
 call vundle#end()
 
-
-
 syntax on
-filetype plugin indent on   " enable detection, plugins and indent
-
+filetype plugin indent on   " enable detection, plugins, and indent
 
 "Emme" 
 " let g:user_emmet_leader_key='<C-K>'
-let g:user_emmet_mode='a'    "enable all function in all mode.
-
+let g:user_emmet_mode='a'    "enable all functions in all modes.
 
 " Local dirs (centralize everything)
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 
-
-" Change mapleader (easier to type), at the top since its used everywhere
+" Change mapleader (easier to type), at the top since it's used everywhere
 let mapleader=","
 let maplocalleader=";"
 
 set spelllang=en_us         " spell checking
-set encoding=utf-8 nobomb   " BOM often causes trouble, UTF-8 is awsum.
-
+set encoding=utf-8 nobomb   " BOM often causes trouble, UTF-8 is awesome.
 
 " --- performance / buffer ---
 set hidden                  " can put buffer to the background without writing
@@ -105,12 +96,10 @@ set hidden                  " can put buffer to the background without writing
 set lazyredraw              " don't update the display while executing macros
 set ttyfast                 " Send more characters at a given time.
 
-
 " --- history / file handling ---
 set history=999             " Increase history (default = 20)
-set undolevels=999          " Moar undo (default=100)
+set undolevels=999          " More undo (default=100)
 set autoread                " reload files if changed externally
-
 
 " --- backup and swap files ---
 " I save all the time, those are annoying and unnecessary...
@@ -118,12 +107,11 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-
 " --- search / regexp ---
 set gdefault                " RegExp global by default
 set magic                   " Enable extended regexes.
 set hlsearch                " highlight searches
-set incsearch               " show the `best match so far' astyped
+set incsearch               " show the `best match so far' as typed
 set ignorecase smartcase    " make searches case-insensitive, unless they
 "   contain upper-case letters
 
@@ -131,11 +119,8 @@ set ignorecase smartcase    " make searches case-insensitive, unless they
 set backspace=indent,eol,start  " allow backspacing over everything.
 " set esckeys                     " Allow cursor keys in insert mode.
 set nostartofline               " Make j/k respect the columns
-set timeoutlen=500              " how long it wait for mapped commands
-set ttimeoutlen=100             " faster timeout for escape key and others
-
-
-
+set timeoutlen=500              " how long it waits for mapped commands
+set ttimeoutlen=100             " faster timeout for the escape key and others
 
 " -----------------------------------------------------------------------------
 " UI
@@ -148,8 +133,8 @@ colorscheme molokai
 hi Comment gui=italic cterm=italic                      " italic comments
 highlight Pmenu ctermbg=gray guibg=gray
 hi NonText guifg=bg                                     " mask ~ on empty lines
-hi clear CursorLineNr                                   " use the theme color for relative number
-hi CursorLineNr gui=bold                                " make relative number bold
+hi clear CursorLineNr                                   " use the theme color for the relative number
+hi CursorLineNr gui=bold                                " make the relative number bold
 hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
 let g:material_terminal_italics = 1
 "remove background
@@ -160,256 +145,8 @@ hi DiffAdd  guibg=#0f111a guifg=#43a047
 hi DiffChange guibg=#0f111a guifg=#fdd835
 hi DiffRemoved guibg=#0f111a guifg=#e53935
 
-" coc multi cursor highlight color
-hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
-
-
-" make 'var' keyword easier to spot
-" defaul line number is too distractive
-hi link LineNr Comment
-hi link OverLength Error
-hi link javascriptType Keyword
-
-
-" set cursorline              " Highlight current line
-set laststatus=2            " Always show status line
-set number                  " Enable line numbers.
-set report=0                " Show all changes.
-set showmode                " Show the current mode.
-set showcmd                 " show partial command on last line of screen.
-set showmatch               " show matching parenthesis
-set splitbelow splitright   " how to split new windows.
-set title                   " Show the filename in the window title bar.
-
-set scrolloff=5             " Start scrolling n lines before horizontal
-"   border of window.
-set sidescrolloff=7         " Start scrolling n chars before end of screen.
-set sidescroll=1            " The minimal number of columns to scroll
-"   horizontally.
-set emoji                                               " enable emojis
-
-" required by coc
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-
-
-
-
-
-
-
-
-
-" -----------------------------------------------------------------------------
-" INDENTATION AND TEXT-WRAP
-" -----------------------------------------------------------------------------
-
-set expandtab                   " Expand tabs to spaces
-set autoindent smartindent      " auto/smart indent
-set copyindent                  " copy previous indentation on auto indent
-set softtabstop=4               " Tab key results in # spaces
-set tabstop=4                   " Tab is # spaces
-set shiftwidth=4                " The # of spaces for indenting.
-set smarttab                    " At start of line, <Tab> inserts shift width
-"   spaces, <Bs> deletes shift width spaces.
-
-set wrap                        " wrap lines
-set textwidth=120
-set formatoptions=qrn1          " automatic formating.
-" set formatoptions-=o            " don't start new lines w/ comment leader on
-"   pressing 'o'
-
-"=========================General Configuration================================
-
-packadd termdebug 
-set mouse=a
-set modifiable
-
-
-" -----------------------------------------------------------------------------
-" PLUGINS
-" -----------------------------------------------------------------------------
-
-let g:snipMate = { 'snippet_version' : 1 }
-" let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-" --- NERDTree ----
-let NERDTreeIgnore=['.DS_Store']
-let NERDTreeShowBookmarks=0         "show bookmarks on startup
-let NERDTreeHighlightCursorline=1   "Highlight the selected entry in the tree
-let NERDTreeShowLineNumbers=0
-let NERDTreeMinimalUI=1
-noremap <C-n> :NERDTreeToggle<CR>
-
-
-
-
-
-
-" --- snipmate ---
-let g:snips_author = 'Miller Medeiros'
-
-" --- vim-css-color ---
-let g:cssColorVimDoNotMessMyUpdatetime = 1
-
-
-" indentLine
-let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
-let g:indentLine_setColors = 0
-let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
-let g:indentLine_fileTypeExclude = ['startify']
-
-
-
-
-
-" --- Tabular.vim ---
-noremap <silent> <leader>t: :Tabularize /:<CR>
-noremap <silent> <leader>t= :Tabularize /=<CR>
-noremap <silent> <leader>t, :Tabularize /,<CR>
-noremap <silent> <leader>t{ :Tabularize /{<CR>
-noremap <silent> <leader>t" :Tabularize /"<CR>
-noremap <silent> <leader>t' :Tabularize /'<CR>
-noremap <silent> <leader>t[ :Tabularize /[<CR>
-noremap <silent> <leader>t/ :Tabularize ///<CR>
-noremap <silent> <leader>t\| :Tabularize /\|<CR>
-
-
-"" coc
-
-" Navigate snippet placeholders using tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" " use <tab> for trigger completion and navigate to the next complete item
-" function! CheckBackspace() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-      \ coc#pum#next(1)
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-      " \ coc#pum#visible() ? coc#pum#next(1) :
-      " \ CheckBackspace() ? "\<Tab>" :
-      " \ coc#refresh()
-
-" list of the extensions to make sure are always installed
-let g:coc_global_extensions = [
-            \'coc-clangd',
-            \'coc-java',
-            \ 'coc-snippets',
-            \]
-
-
-
-function! KeywordsAll()
-    setl iskeyword=@,48-57,192-255,\@,\$,%,-,_
-endfunc
-
-function! KeywordsBasic()
-    setl iskeyword=@,48-57,192-255
-endfunc
-
-
 " rainbow brackets
 let g:rainbow_active = 1
-
-
-"" FZF
-
-let g:fzf_action = {
-            \ 'ctrl-t': 'tab split',
-            \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
-
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
-let g:fzf_tags_command = 'ctags -R'
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
-nnoremap <silent> <Leader>s :Rg<CR>
-nnoremap <silent> <Leader>f :Files<CR>
-
-
-
-
-" -----------------------------------------------------------------------------
-" KEY MAPPINGS
-" -----------------------------------------------------------------------------
-
-" mapleader set at the top of the file to avoid conflicts
-
-
-" --- FIX/IMPROVE DEFAULT BEHAVIOR ---
-
-" avoid mistyping commands
-command! W w
-command! Wq wq
-command! Bd bd
-
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing
-nnoremap S i<cr><esc><right>
-
-" movement by screen line instead of file line (for text wrap)
-nnoremap j gj
-nnoremap <down> gj
-nnoremap k gk
-nnoremap <up> gk
-
-" next tab
-nnoremap <C-Tab> :tabn<CR>
-
-" automatic esc, really uncommon to type jj,jk
-inoremap jj <ESC>
-inoremap jk <Esc>
-
-" Faster scrolling
-nnoremap <C-e> 3
-
-
-" Bubble single lines, similar to Eclipse (requires unimpaired.vim)
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines, similar to Eclipse (requires unimpaired.vim)
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Duplicate lines, similar to Eclipse
-noremap <C-S-Up> YP
-noremap <C-S-Down> YP
-
-" 'fix' search regexp to be compatible with Perl format
-" nmap / /\v
-" vmap / /\v
-
-" Use the damn hjkl keys
-" noremap <up> <nop>
-" noremap <down> <nop>
-" noremap <left> <nop>
-" noremap <right> <nop>
-
-" improve the 'search word under cursor' behavior
-nnoremap * :silent call KeywordsAll()<CR> *
-nnoremap # :silent call KeywordsAll()<CR> #
-
 
 " --- COMMON STUFF / HELPERS ---
 
@@ -432,14 +169,13 @@ nnoremap <leader>rr :silent call KeywordsAll()<CR> :%s#\<<C-r>=expand("<cword>")
 " noremap ,, i_<esc>r
 " noremap ;; a_<esc>r
 
-
 " Move between splits (windows)
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Move windows around (only works on same row)
+" Move windows around (only works on the same row)
 noremap <C-S-Right> <C-w>r
 noremap <C-S-Left> <C-w>R
 
@@ -450,7 +186,7 @@ noremap <leader>i :split<cr>
 " close window
 noremap <leader>q :clo<CR>
 
-" delete buffer but keep window open (requires bufkill.vim)
+" delete buffer but keep the window open (requires bufkill.vim)
 map <leader>bd :BD<CR>
 
 " smarter next/prev buffer (requires bufkill.vim)
@@ -461,8 +197,7 @@ map <leader>bp :BB<CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
-
-" add spaces inside current parenthesis
+" add spaces inside the current parenthesis
 map <leader>( vi(xi  P
 
 "Run programs
@@ -491,19 +226,16 @@ function RunCPP()
     execute "normal! :wincmd p \<cr>"
 endfunction
 
-
 map <F2> :call RunProgram()<CR>
 map <F3> :call  RunCPP()<CR>
 map <F4> :set paste<CR>
 map <F5> :set nopaste<CR>
-
 
 set clipboard=unnamedplus
 "transperent background
 " hi Normal guibg=NONE ctermbg=NONE
 hi clear LineNr
 highlight clear SignColumn
-
 xmap <leader>a viw <Plug>(coc-codeaction-selected)
 nmap <leader>a  viw <Plug>(coc-codeaction-selected)
 
@@ -511,22 +243,3 @@ xmap <leader>d  call CocActionAsync('showSignatureHelp')
 nmap <leader>d  call CocActionAsync('showSignatureHelp') 
 noremap <silent> <C-S-Left> :vertical resize -20<CR>
 let g:netrw_browsex_viewer="brave-browser"
-
-
-
-let g:auto_save = 1  " enable AutoSave on Vim startup
-" .vimrc
-let g:auto_save_silent = 1  " do not display the auto-save notification
-let g:auto_save_write_all_buffers = 1
-
-
-
-	if has('nvim-0.4.0') || has('patch-8.2.0750')
-	  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-	  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-	  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-	  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-	  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-	  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-	endif
- 
